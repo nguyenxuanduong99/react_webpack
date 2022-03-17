@@ -1,0 +1,386 @@
+html {
+    font-size: 13px;
+    overflow-x: hidden;
+}
+
+.p-datatable-responsive .p-datatable-tbody > tr > td .p-column-title {
+    display: none;
+}
+
+@media screen and (max-width: 576px) {
+    .p-datatable.p-datatable-responsive .p-datatable-thead > tr > th,
+    .p-datatable.p-datatable-responsive .p-datatable-tfoot > tr > td {
+        display: none !important;
+    }
+
+    .p-datatable.p-datatable-responsive .p-datatable-tbody > tr > td {
+        text-align: left;
+        display: block;
+        width: 100%;
+        float: left;
+        clear: left;
+        border: 0 none;
+    }
+
+    .p-datatable.p-datatable-responsive .p-datatable-tbody > tr > td .p-column-title {
+        padding: .4rem;
+        min-width: 30%;
+        display: inline-block;
+        margin: -.4em 1em -.4em -.4rem;
+        font-weight: bold;
+    }
+
+    .p-datatable.p-datatable-responsive .p-datatable-tbody > tr > td:last-child {
+        border-bottom: 1px solid var(--surface-d);
+    }
+}
+
+/*.p-datatable-thead > tr > th {*/
+/*    padding: 0.571em 0.857em;*/
+/*    border: 1px solid #c8c8c8;*/
+/*    font-weight: bold;*/
+/*    color: #333333;*/
+/*    background-color: #f4f4f4;*/
+/*    text-align: center;*/
+/*    text-overflow: ellipsis;*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*.p-menubar {*/
+/*    padding: .25em;*/
+/*}*/
+
+/*.p-menubar .p-submenu-list {*/
+/*    width: auto;*/
+/*    text-wrap: avoid;*/
+/*    white-space: nowrap;*/
+/*}*/
+
+/*.p-tieredmenu .p-menuitem {*/
+/*    width: auto;*/
+/*    text-wrap: avoid;*/
+/*    white-space: nowrap;*/
+/*}*/
+
+.noExpander span.ui-row-toggler {
+    display: none;
+}
+
+/*.p-dialog-title {*/
+/*    color: #333333;*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*.p-card {*/
+/*    -moz-border-radius: 5px;*/
+/*    -webkit-border-radius: 5px;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*.p-dialog .p-dialog-content {*/
+/*    overflow: scroll;*/
+/*    max-height: 90%;*/
+/*}*/
+
+/*.p-fluid .p-dropdown {*/
+/*    width: 100% !important;*/
+/*}*/
+
+.t-thread-setting .p-datatable .p-datatable-tbody > tr > td {
+    border: 0 !important;
+}
+
+.hideHeader .p-datatable-thead {
+    display: none;
+}
+
+.showHeader .p-sortable-column .p-column-title {
+    display: inline !important;
+}
+
+/*body .p-dialog-footer button {*/
+/*    margin: 0 0.5em 0 0;*/
+/*}*/
+
+/*  The responsive utilities */
+
+.hidden {
+
+}
+
+.hidden .h-sm {
+    display: none;
+}
+
+.hidden .s-sm {
+    display: inherit;
+}
+
+@media screen and (min-width: 576px) {
+    .hidden .h-sm {
+        display: inherit !important;
+    }
+
+    .hidden .s-sm {
+        display: none !important;
+    }
+}
+
+.hidden .h-md {
+    display: none;
+}
+
+.hidden .s-md {
+    display: inherit;
+}
+
+@media screen and (min-width: 768px) {
+    .hidden .h-md {
+        display: inherit !important;
+    }
+
+    .hidden .s-md {
+        display: none !important;
+    }
+}
+
+.hidden .h-lg {
+    display: none;
+}
+
+.hidden .s-lg {
+    display: inherit;
+}
+
+@media screen and (min-width: 992px) {
+    .hidden .h-lg {
+        display: inherit !important;
+    }
+
+    .hidden .s-lg {
+        display: none !important;
+    }
+}
+
+.hidden .h-xl {
+    display: none;
+}
+
+.hidden .s-xl {
+    display: inherit;
+}
+
+@media screen and (min-width: 1200px) {
+    .hidden .h-xl {
+        display: inherit !important;
+    }
+
+    .hidden .s-xl {
+        display: none !important;
+    }
+}
+
+.p-form-container {
+    color: #FFFFFF;
+    display: block;
+    height: auto;
+    min-width: 370px;
+    opacity: 1;
+    position: relative;
+}
+
+.p-dashboard-content {
+    min-height: calc(100vh - 100px);
+}
+
+.p-dashboard-container {
+    width: 100%;
+    margin-left: auto;
+    padding-left: 0;
+    margin-right: auto;
+    padding-right: 0;
+}
+
+.p-form-container {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.p-dashboard-content {
+    padding: 0;
+}
+
+.p-card {
+    width: 100% !important;
+    -moz-border-radius: unset;
+    -webkit-border-radius: unset;
+    border-radius: unset;
+}
+
+/*.p-dialog .p-dialog-title {*/
+/*    padding: .5em .75em;*/
+/*    position: relative;*/
+/*    border: 0;*/
+/*}*/
+
+.p-dialog .p-dialog-content {
+    position: relative;
+    border: 0;
+    padding: .5em .75em;
+    background: none;
+    zoom: 1;
+    overflow: auto;
+    max-height: unset !important;
+}
+
+.p-dialog .p-resizable-handle {
+    width: 14px;
+    height: 14px;
+    right: 3px;
+    bottom: 3px;
+    position: absolute;
+    font-size: .1px;
+    display: block;
+    cursor: se-resize;
+}
+
+.p-dialog-footer {
+    padding: 1em;
+    border-width: 1px 0 0 0;
+    text-align: right;
+    border: none !important;
+}
+
+.p-dialog-mask {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.p-dialog-maximized {
+    -webkit-transition: left .3s, top .3s, width .3s, height .3s;
+    transition: left .3s, top .3s, width .3s, height .3s;
+}
+
+/*ConfirmDialog*/
+
+.p-confirmdialog {
+    width: 30em;
+}
+
+.p-confirmdialog.p-dialog .p-dialog-content {
+    padding: 1em 2em;
+}
+
+.p-confirmdialog .p-dialog-content .p-confirmdialog-icon {
+    font-size: 1.5em;
+    vertical-align: middle;
+    margin-right: .5em;
+}
+
+.p-confirmdialog .p-dialog-content .p-confirmdialog-message {
+    vertical-align: middle;
+}
+
+/* Fluid */
+.p-fluid .p-dialog-footer .p-button {
+    width: auto;
+}
+
+/* RTL */
+.p-rtl .p-dialog .p-dialog-titlebar-close {
+    float: left;
+}
+
+.p-rtl .p-dialog .p-dialog-footer {
+    text-align: left;
+}
+
+@media screen and (max-width: 40em) {
+    .p-confirmdialog {
+        width: 90%;
+    }
+}
+
+.p-control-label {
+    text-align: right;
+}
+
+.p-control-label-required {
+    font-weight: bolder;
+}
+
+.p-control-control {
+
+}
+
+@media screen and (max-width: 576px) {
+    .p-datatable-responsive-hidden {
+        display: none !important;
+    }
+
+}
+
+@media screen and (min-width: 577px) {
+    .p-datatable-responsive-hidden {
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .p-space {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .p-space {
+    }
+}
+
+.p-header-toolbar {
+    border: none !important;
+    padding: 0 !important;
+}
+
+.p-panel-title {
+    width: 100%;
+}
+
+.p-maxwidth {
+    width: 100%;
+}
+
+/*.float-button {*/
+/*    float: right;*/
+/*    top: 15px;*/
+/*    right: 5px;*/
+/*    z-index: 9999;*/
+/*    position: absolute;*/
+/*    color: black;*/
+/*    background-color: white;*/
+/*    border: 1px solid #eaeaea;*/
+/*}*/
+
+.p-dashboard-container .float-button {
+    display: block;
+    position: absolute;
+    width: 52px !important;
+    height: 48px;
+    line-height: 48px;
+    background-color: var(--primary-color);
+    text-align: center;
+    color: var(--primary-color-text);
+    top: 0;
+    right: -51px;
+    z-index: 1;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    transition: right 500ms;
+}
+
+.p-dashboard-container .float-button:hover {
+    right: -12px;
+}
