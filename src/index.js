@@ -8,7 +8,6 @@ import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import "primereact/resources/primereact.min.css";
 import "react-grid-layout/css/styles.css";
-import "font-awesome/css/font-awesome.css";
 
 ReactDom.render(
     <HashRouter>

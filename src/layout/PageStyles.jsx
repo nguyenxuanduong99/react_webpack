@@ -14,10 +14,14 @@ const pageStyles = {
         border: "none",
     },
     bgWarnMessage:{
-        backgroundColor: "#FBF1DB"
+        backgroundColor: "#FBF1DB",
+        height: "3rem"
     },
     bgLeft:{
         backgroundColor: "#96A507FF"
+    },
+    bgDownload:{
+        backgroundColor:"#FBF1DB"
     }
 };
 export default pageStyles;
