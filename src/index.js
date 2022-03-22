@@ -5,8 +5,9 @@ import indexRoutes from "./routes/index.jsx";
 import "/src/assets/style.css";
 import "/src/assets/theme.css";
 import "primeflex/primeflex.css";
-import "react-grid-layout/css/styles.css";
+// import "react-grid-layout/css/styles.css";
 import "primeicons/primeicons.css";
+import "primereact/dropdown/dropdown.min.css";
 
 ReactDom.render(
     <HashRouter>

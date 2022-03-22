@@ -3,7 +3,7 @@ import withStyles from "react-jss";
 import pageStyles from "./PageStyles.jsx";
 import {Dropdown} from "primereact/dropdown";
 import Logo from "../assets/images/logo.png";
-import QrCode from "../assets/images/qrCode.png";
+import QrCode from "../assets/images/qrCode.jpg";
 import {Card} from "primereact/card";
 import {Button} from "primereact/button";
 
@@ -12,7 +12,7 @@ class Pages extends Component {
         super(props);
         this.state = {
             warningMessage: "Vui lòng không tắt trình duyệt cho đến khi đơn đặt hàng được xác nhận.",
-            selectedLanguage: "",
+            selectedLanguage: "Việt Nam",
             selectedOpenMobipay: 0,
             openMobipayOptions: [
                 {name: "Quét mã QR", value: 0},
@@ -38,7 +38,6 @@ class Pages extends Component {
         this.timer = 0;
         this.countDown = this.countDown.bind(this);
     }
-
     componentDidMount() {
         //TODO: call API get response contain time
         let response = {
@@ -52,27 +51,6 @@ class Pages extends Component {
         // this.intervalId = setInterval(this.timer, 1000);
         this.timer = setInterval(this.countDown, 1000);
     }
-
-    // componentWillUnmount() {
-    //     clearInterval(this.intervalId);
-    // }
-    // timer() {
-    //     let seconds = this.state.seconds;
-    //     let minutes = this.state.minutes;
-    //     if (seconds > 0) {
-    //         this.setState({seconds: seconds - 1});
-    //     }
-    //     if (seconds === 0) {
-    //         if (minutes <= 0) {
-    //             clearInterval(this.intervalId);
-    //             // redirect to expired transaction page
-    //
-    //         } else {
-    //             this.setState({minutes: minutes - 1});
-    //             this.setState({seconds: 59});
-    //         }
-    //     }
-    // }
 
     secondsToTime(secs) {
         let hours = Math.floor(secs / (60 * 60));
@@ -92,11 +70,15 @@ class Pages extends Component {
     }
 
     countDown() {
-        // Remove one second, set state so a re-render happens.
-        let timeunix = this.state.timeunix - 1;
+
+        let response = {
+            time:   new Date().getTime() + 75,
+        };
+        let timeunix = response.time - new Date().getTime();
+        this.setState({timeunix: timeunix});
+
         this.setState({
-            time: this.secondsToTime(timeunix),
-            timeunix: timeunix,
+            time: this.secondsToTime(this.state.timeunix),
         });
 
         // Check if we're at zero.
@@ -115,6 +97,7 @@ class Pages extends Component {
 
     onLanguageChange(e) {
         this.setState({selectedLanguage: e.value});
+
     }
 
     render() {
@@ -129,13 +112,13 @@ class Pages extends Component {
                                  src={Logo}/>
                             <span className={"font-semibold text-3xl"}>| GATEWAY</span>
                         </a>
-                        <div className={"col-4"}/>
+                        <div className={"col-1"}/>
+                        {/*TODO: Không nhận value lỗi style*/}
                         <div className="col-2">
-                            <div className={"flex justify-content-center"}>
-                                <Dropdown value={this.state.selectedLanguage} optionLabel={"name"}
+                                <Dropdown value={this.state.selectedLanguage}   optionLabel={"name"}
                                           options={this.language} onChange={this.onLanguageChange}
-                                          placeholder={"Việt Nam"}/>
-                            </div>
+                                          placeholder={"Việt Nam"}
+                                />
 
 
                         </div>
@@ -373,7 +356,7 @@ class Pages extends Component {
                             <div className={"col-5"}>
                                 <h2>Hỗ trợ khách hàng</h2>
                                 <div className={"flex"}>
-                                    <Button className={"col-5"} style={{borderRadius: 70, height: 40}}>
+                                    <Button className={"flex col-6 align-items-center"} style={{borderRadius: 20, height: 40}}>
                                         <i className={"pi pi-phone col-1"}/>
                                         <div className={"col-11"}>
                                             <span>1900 54 13 12</span>
@@ -381,7 +364,7 @@ class Pages extends Component {
                                             <span>(Cước phí 1000đ/phút)</span>
                                         </div>
                                     </Button>
-                                    <Button className={"col-5 ml-3"} style={{borderRadius: 70, height: 40}}>
+                                    <Button className={"flex col-6 ml-3 align-items-center"} style={{borderRadius: 70, height: 40}}>
                                         <i className={"pi pi-phone col-1"} color={"#F27"}/>
                                         <div className={"col-11"}>
                                             <p>hotro@mobipay.vn</p>
@@ -394,8 +377,8 @@ class Pages extends Component {
                         <div className={"flex justify-content-end"}>
                             <p>
                                 2022
-                                <a href={"https://telsoft.com.vn"}>TELSOFT</a>
-                                - Copyright by TELSOFT, All right is reserved
+                                <a href={"https://telsoft.com.vn"}>MOBIFONE</a>
+                                - Copyright by MobiMoney, All right is reserved
                             </p>
                         </div>
 
