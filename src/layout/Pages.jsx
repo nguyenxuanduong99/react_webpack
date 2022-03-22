@@ -6,17 +6,18 @@ import Logo from "../assets/images/logo.png";
 import QrCode from "../assets/images/qrCode.jpg";
 import {Card} from "primereact/card";
 import {Button} from "primereact/button";
+import {map} from "../intl/Message.jsx";
 
 class Pages extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            warningMessage: "Vui lòng không tắt trình duyệt cho đến khi đơn đặt hàng được xác nhận.",
+            // warningMessage: map("Page.WarningMessage"),
             selectedLanguage: "Việt Nam",
             selectedOpenMobipay: 0,
             openMobipayOptions: [
-                {name: "Quét mã QR", value: 0},
-                {name: "Ứng dụng Mobipay", value: 1}
+                {name: map("Page.QRCode"), value: 0},
+                {name: map("Page.MobiMoney"), value: 1}
             ],
 
             timeunix: 75,
@@ -130,7 +131,7 @@ class Pages extends Component {
                     {/*Warn Message*/}
                     <div className={classes.bgWarnMessage}>
                         <div className={"flex justify-content-center"}>
-                            <p className={"text-lg font-medium"}>{this.state.warningMessage}</p>
+                            <p className={"text-lg font-medium"}>{map("Page.WarningMessage")}</p>
                         </div>
                     </div>
 
@@ -182,7 +183,7 @@ class Pages extends Component {
                                                     backgroundImage: "linear-gradient(134deg, rgb(0, 141, 231) 30%, rgb(12, 197, 107))"
                                                 }}>
                                                     <div className={"flex justify-content-center"}>
-                                                        <h1>Hướng dẫn thanh toán</h1>
+                                                        <h1>{map("Page.Payment_Guide")}</h1>
                                                     </div>
 
                                                     <div className={"flex"}>
@@ -269,31 +270,31 @@ class Pages extends Component {
                         {/*fragment right*/}
                         <div className={"col-3"}>
                             <Card>
-                                <h1>Thông tin đơn hàng</h1>
+                                <h1>{map("Page.InfoOrder")}</h1>
                                 <div>
                                     {/*logo*/}
                                     {/*<img src={Logo}/>*/}
-                                    <h2>Nhà cung cấp</h2>
+                                    <h2>{map("Page.Manufacture")}</h2>
                                     <p className={"font-medium"}>Dominos HN</p>
                                 </div>
                                 <div>
-                                    <h3>Số tiền thanh toán</h3>
+                                    <h3>{map("Page.Amount")}</h3>
                                     <p>{this.state.amount}</p>
                                 </div>
                                 <div>
                                     <div>
-                                        <h3>Mã giao dịch</h3>
+                                        <h3>{map("Page.ServiceCode")}</h3>
                                         <p>{this.state.serviceCode}</p>
                                     </div>
                                     <div>
-                                        <h3>Nội dung</h3>
+                                        <h3>{map("Page.Description")}</h3>
                                         <p>{this.state.description}</p>
                                     </div>
                                 </div>
                             </Card>
                             {/*thoi gian giao dich*/}
                             <Card className={"mt-3"} style={{backgroundColor: "#FBF1DB"}}>
-                                <p className={"text-center"}>Giao dịch kết thúc trong</p>
+                                <p className={"text-center"}>{map("Page.TransactionTime")}</p>
                                 <div className={"text-center"}>
                                     {this.state.time.m} : {this.state.time.s}
                                 </div>
@@ -333,24 +334,25 @@ class Pages extends Component {
                     <div className={classes.bgFooter} style={{color: "white"}}>
                         <div className={"flex"}>
                             <div className={"col-1"}/>
-                            <div className={"col-5"}>
-                                <div className={"flex"}>
+                            <div className={"flex col-5"}>
                                     <div className={"col-2"}>
-                                        <img src={Logo}/>
+                                        <img src={Logo} className={"w-full"}/>
                                     </div>
-                                    <div className={"col-10"}>
-                                        <p>
-                                            <strong>Mobipay Gateway</strong>
-                                        </p>
-                                        <p>
-                                            <strong>Dịch vụ công thanh toán của tập đoàn Mobifone</strong>
-                                        </p>
-                                        <p>
-                                            <strong>Giấy phép hoạt động cung ứng dịch vụ Trung gian thanh toán số do Nhà
-                                                nước cấp ngày 18/1/2020 </strong>
-                                        </p>
+                                    <div className={" col-10"}>
+                                        <div>
+                                            <p>
+                                                <strong>Mobipay Gateway</strong>
+                                            </p>
+                                            <p>
+                                                <strong>Dịch vụ công thanh toán của tập đoàn Mobifone</strong>
+                                            </p>
+                                            <p>
+                                                <strong>Giấy phép hoạt động cung ứng dịch vụ Trung gian thanh toán số do Nhà
+                                                    nước cấp ngày 18/1/2020 </strong>
+                                            </p>
+                                        </div>
+
                                     </div>
-                                </div>
 
                             </div>
                             <div className={"col-5"}>

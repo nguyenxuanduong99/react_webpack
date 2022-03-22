@@ -9,6 +9,9 @@ import "primeflex/primeflex.css";
 import "primeicons/primeicons.css";
 import "primereact/dropdown/dropdown.min.css";
 
+import Message from "./intl/Message.jsx";
+
+Message.init();
 ReactDom.render(
     <HashRouter>
         <Switch>
