@@ -41,15 +41,21 @@ module.exports = {
                     },
                 ]
             },
+            // {
+            //     test: /\.(ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+            //     use: [{
+            //         loader: 'file-loader',
+            //         options: {
+            //             name: '[name].[ext]',
+            //             outputPath: 'fonts/'
+            //         }
+            //     }]
+            // },
+            // WebPack 5 khong dung file loader cho mot so tai nguyen, phai doi sang kieu nay
             {
-                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        name: '[name].[ext]',
-                        outputPath: 'fonts/'
-                    }
-                }]
+                test: /\.(woff(2)?|ttf|eot|svg)$/i,
+                type: 'asset/resource',
+                dependency: {not: ['url']},
             },
         ]
     },
