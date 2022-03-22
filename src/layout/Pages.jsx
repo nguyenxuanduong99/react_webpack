@@ -309,7 +309,7 @@ class Pages extends Component {
                                 </div>
                             </Card>
                             {/*thoi gian giao dich*/}
-                            <Card className={"mt-3"}>
+                            <Card className={"mt-3"} style={{backgroundColor: "#FBF1DB"}}>
                                 <p className={"text-center"}>Giao dịch kết thúc trong</p>
                                 <div className={"text-center"}>
                                     {this.state.time.m} : {this.state.time.s}
