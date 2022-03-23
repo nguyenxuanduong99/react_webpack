@@ -3,24 +3,20 @@ import withStyles from "react-jss";
 import pageStyles from "./PageStyles.jsx";
 import {Dropdown} from "primereact/dropdown";
 import Logo from "../assets/images/logo.png";
-import QrCode from "../assets/images/qrCode.jpg";
-import {Card} from "primereact/card";
-import {Button} from "primereact/button";
 import {map} from "../intl/Message.jsx";
+import Session from "../variables/session";
+import Footer from "../components/Footer.jsx";
+import {Card} from "primereact/card";
+import QRCode from "../components/QRCode";
+import Payment from "../components/Payment";
 
 class Pages extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // warningMessage: map("Page.WarningMessage"),
-            selectedLanguage: "Việt Nam",
-            selectedOpenMobipay: 0,
-            openMobipayOptions: [
-                {name: map("Page.QRCode"), value: 0},
-                {name: map("Page.MobiMoney"), value: 1}
-            ],
-
-            timeunix: 75,
+            selectedLanguage: "vn",
+            selectedComponent: 0,
+            timeunix: 0,
             time: {},
 
             amount: "26450",
@@ -28,17 +24,23 @@ class Pages extends Component {
             description: "Thanh toán tại Mobipay",
 
         };
+        this.component = [
+            {value: "QRCode", key: 0},
+            {value: "Payment", key: 1},
+            {value: "WalletPayment", key: 2},
+            {value: "LinkedBank", key: 3},
+            {value: "OtherBank", key: 0},
+        ]
         this.language = [
-            {name: "Việt Nam", key: 0},
-            {name: "English", key: 1}
+            {value: "Việt Nam", key: "vn"},
+            {value: "English", key: "en"}
         ];
 
         this.onLanguageChange = this.onLanguageChange.bind(this);
-        this.openQrCode = this.openQrCode.bind(this);
-        this.openMobipay = this.openMobipay.bind(this);
         this.timer = 0;
         this.countDown = this.countDown.bind(this);
     }
+
     componentDidMount() {
         //TODO: call API get response contain time
         let response = {
@@ -62,20 +64,15 @@ class Pages extends Component {
         let divisor_for_seconds = divisor_for_minutes % 60;
         let seconds = Math.ceil(divisor_for_seconds);
 
-        let obj = {
+        return {
             "h": hours,
             "m": minutes,
             "s": seconds
         };
-        return obj;
     }
 
     countDown() {
-
-        let response = {
-            time:   new Date().getTime() + 75,
-        };
-        let timeunix = response.time - new Date().getTime();
+        let timeunix = this.state.timeunix - 1;
         this.setState({timeunix: timeunix});
 
         this.setState({
@@ -83,309 +80,116 @@ class Pages extends Component {
         });
 
         // Check if we're at zero.
-        if (timeunix == 0) {
+        if (timeunix <= 0) {
             clearInterval(this.timer);
         }
     }
 
-    openQrCode() {
-        this.setState({selectedOpenMobipay: 0})
-    }
-
-    openMobipay() {
-        this.setState({selectedOpenMobipay: 1})
-    }
-
     onLanguageChange(e) {
+        Session.setLocale(e.value);
+        console.log(e);
         this.setState({selectedLanguage: e.value});
+    }
 
+    renderSwitch(value){
+        switch (value){
+            case 0:
+                return <QRCode />;
+            case 1:
+                return <Payment />;
+            case 2:
+                return <div />
+        }
     }
 
     render() {
-        const {classes} = this.props;
+        const {classes: {bgWarnMessage, container, imgLog}} = this.props;
         return (
-            <div className={classes.container}>
+            <div className={container}>
                 {/*heaader*/}
-                <div className={"p-1"}>
-                    <div className={"flex"}>
-                        <a className={"col-6 align-items-end"}>
-                            <img className={classes.imgLog}
-                                 src={Logo}/>
-                            <span className={"font-semibold text-3xl"}>| GATEWAY</span>
-                        </a>
-                        <div className={"col-1"}/>
-                        {/*TODO: Không nhận value lỗi style*/}
-                        <div className="col-2">
-                                <Dropdown value={this.state.selectedLanguage}   optionLabel={"name"}
-                                          options={this.language} onChange={this.onLanguageChange}
-                                          placeholder={"Việt Nam"}
-                                />
+                <div className={"flex"}>
+                    <a className={"col-6 align-items-end"}>
+                        <img className={imgLog}
+                             src={Logo}/>
+                        <span className={"font-semibold text-3xl"}>| GATEWAY</span>
+                    </a>
+                    <div className={"col-4"}/>
+                    <div className="col-2">
+                        <Dropdown value={this.state.selectedLanguage}
+                                  optionLabel={"value"}
+                                  optionValue={"key"}
+                                  options={this.language}
+                                  onChange={this.onLanguageChange}
+                            // placeholder={"Việt Nam"}
+                        />
+                    </div>
+                </div>
 
-
-                        </div>
+                {/*Warn Message*/}
+                <div className={bgWarnMessage}>
+                    <div className={"flex justify-content-center"}>
+                        <p className={"text-lg font-medium"}>{map("Page.WarningMessage")}</p>
                     </div>
                 </div>
 
                 {/*body*/}
-                <div>
-                    {/*Warn Message*/}
-                    <div className={classes.bgWarnMessage}>
-                        <div className={"flex justify-content-center"}>
-                            <p className={"text-lg font-medium"}>{map("Page.WarningMessage")}</p>
-                        </div>
+                <div className={"flex"}>
+                    <div className={"col-1"}/>
+
+                    {/*fragment left multiple component*/}
+                    <div className={"col-7"}>
+                        {this.renderSwitch(this.state.selectedComponent)}
                     </div>
 
-                    <div className={"flex"}>
-                        <div className={"col-1"}/>
-                        {/*fragment left*/}
-                        <div className={"col-7"}>
-                            <Card className={"justify-content-center"}>
-                                {/*quet ung dung*/}
-                                <div className={"flex flex-nowrap justify-content-center"}>
-                                    <div className={"col-6 "}>
-                                        <Button label={this.state.openMobipayOptions[0].name}
-                                                className="text-2xl font-semibold  w-full"
-                                                onClick={this.openQrCode}
-                                                style={{
-                                                    backgroundColor: this.state.selectedOpenMobipay == 1 ? "white" : "#007ad9",
-                                                    color: this.state.selectedOpenMobipay == 1 ? "#000000" : "white"
-                                                }}/>
-                                    </div>
-                                    <div className={"col-6"}>
-                                        <Button label={this.state.openMobipayOptions[1].name}
-                                                className="text-2xl font-semibold w-full"
-                                                onClick={this.openMobipay}
-                                                style={{
-                                                    backgroundColor: this.state.selectedOpenMobipay == 0 ? "white" : "#007ad9",
-                                                    color: this.state.selectedOpenMobipay == 0 ? "#000000" : "white"
-                                                }}/>
-                                    </div>
+                    {/*fragment right*/}
+                    <div className={"col-3"}>
+                        {/*info order*/}
+                        <div>
+                            <div className={"flex justify-content-center"}>
+                                <h1>{map("Page.InfoOrder")}</h1>
+                            </div>
+                            <div>
+                                {/*logo*/}
+                                {/*<img src={Logo}/>*/}
+                                <h2>{map("Page.Manufacture")}</h2>
+                                <p className={"font-medium"}>Dominos HN</p>
+                            </div>
+                            <div>
+                                <h2>{map("Page.Amount")}</h2>
+                                <p>{this.state.amount}</p>
+                            </div>
+                            <div>
+                                <div>
+                                    <h2>{map("Page.ServiceCode")}</h2>
+                                    <p>{this.state.serviceCode}</p>
                                 </div>
                                 <div>
-                                    {
-                                        this.state.selectedOpenMobipay == 0
-                                            ?
-                                            <div className={"w-full"}>
-                                                <div>
-                                                    <div className={"flex justify-content-center"}>
-                                                        <img src={Logo} className={classes.imgLog2}/>
-                                                    </div>
-
-                                                    {/*ảnh quét QR*/}
-                                                    <div className={"flex justify-content-center "}>
-                                                        <img src={QrCode}/>
-                                                    </div>
-                                                </div>
-
-                                                <div className={"w-full"} style={{
-                                                    color: "white"
-                                                    ,
-                                                    backgroundImage: "linear-gradient(134deg, rgb(0, 141, 231) 30%, rgb(12, 197, 107))"
-                                                }}>
-                                                    <div className={"flex justify-content-center"}>
-                                                        <h1>{map("Page.Payment_Guide")}</h1>
-                                                    </div>
-
-                                                    <div className={"flex"}>
-                                                        <div className={"col-4"}>
-                                                            <div className={"flex"}>
-                                                                <img src={""}/>
-                                                            </div>
-                                                            <p>Bước 1</p>
-                                                            <p>Mở ứng dụng Mobipay</p>
-                                                        </div>
-                                                        <div className={"col-4"}>
-                                                            <div className={"flex"}>
-                                                                <img src={""}/>
-                                                            </div>
-                                                            <p>Bước 2</p>
-                                                            <p>
-                                                                "Trên Mobipay chọn biểu tượng"
-                                                                <img src={""}/>
-                                                            </p>
-                                                        </div>
-                                                        <div className={"col-4"}>
-                                                            <div className={"flex"}>
-                                                                <img src={""}/>
-                                                            </div>
-                                                            <p>Bước 3</p>
-                                                            <p>Mở ứng dụng Mobipay</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            :
-                                            <div className={""}>
-                                                <div className={"flex justify-content-center mt-3 mb-3"}>
-                                                    Bạn có thể thanh toán bằng Mobipay
-                                                </div>
-                                                <div className={"flex"}>
-                                                    <div className={"col-3"}/>
-                                                    <Button label={"Mở ứng dụng Mobipay"}
-                                                            className="text-2xl font-semibold  w-full"
-                                                        // onClick={this.openQrCode}
-                                                            icon={"pi pi-check"}
-                                                            style={{
-                                                                backgroundColor: "#007ad9",
-                                                                color: "white"
-                                                            }}/>
-                                                    <div className={"col-3"}/>
-                                                </div>
-                                                <div className={"flex justify-content-center mt-3"}>
-                                                    Chưa có ứng dụng Mobipay?
-                                                    <a href={""} style={{color: "#0070c9"}}>
-                                                        Tải ngay tại đây
-                                                    </a>
-                                                </div>
-                                            </div>
-                                    }
+                                    <h2>{map("Page.Description")}</h2>
+                                    <p>{this.state.description}</p>
                                 </div>
-
-                            </Card>
+                            </div>
                             {/*cancel-transaction*/}
-
-                            <div className={"mt-3 mb-6"} style={{color: "#ff4f31"}}>
-                                <a style={{fontSize: "1.3em"}}>
+                            <div className={"mt-6"}>
+                                <a href={"#"} style={{fontSize: "1.2em", color: "#ff4f31"}}>
                                     <i className={"pi pi-times mr-1"}/>
-                                    Hủy giao dịch
+                                    {map("Page.CancelTransaction")}
                                 </a>
                             </div>
-
-                            {/*download mobipay*/}
-                            <Card className={classes.bgDownload}>
-                                <div className={"flex align-items-center"}>
-                                    <div className={"flex col-1 justify-content-center"}>
-                                        <i className={"pi pi-info-circle"}/>
-                                    </div>
-                                    <p className={"col-11"}>
-                                        "Thiết bị này cần có ứng dụng Mobipay để thanh toán."
-                                        <br/>
-                                        <a style={{color: "#008fe5"}}>Tải ứng dụng Mobipay tại đây</a>
-                                    </p>
-                                </div>
-                            </Card>
-
                         </div>
-
-                        {/*fragment right*/}
-                        <div className={"col-3"}>
-                            <Card>
-                                <h1>{map("Page.InfoOrder")}</h1>
-                                <div>
-                                    {/*logo*/}
-                                    {/*<img src={Logo}/>*/}
-                                    <h2>{map("Page.Manufacture")}</h2>
-                                    <p className={"font-medium"}>Dominos HN</p>
-                                </div>
-                                <div>
-                                    <h3>{map("Page.Amount")}</h3>
-                                    <p>{this.state.amount}</p>
-                                </div>
-                                <div>
-                                    <div>
-                                        <h3>{map("Page.ServiceCode")}</h3>
-                                        <p>{this.state.serviceCode}</p>
-                                    </div>
-                                    <div>
-                                        <h3>{map("Page.Description")}</h3>
-                                        <p>{this.state.description}</p>
-                                    </div>
-                                </div>
-                            </Card>
-                            {/*thoi gian giao dich*/}
-                            <Card className={"mt-3"} style={{backgroundColor: "#FBF1DB"}}>
+                        {/*thoi gian giao dich*/}
+                        <Card className={"mt-3"} style={{backgroundColor: "#FBF1DB"}}>
+                            <div>
                                 <p className={"text-center"}>{map("Page.TransactionTime")}</p>
                                 <div className={"text-center"}>
                                     {this.state.time.m} : {this.state.time.s}
                                 </div>
-                            </Card>
-                        </div>
-                    </div>
-                </div>
-
-                {/*safety and security*/}
-                <div className={classes.bgSercuritySafe}>
-                    <div className={"flex flex-wrap"}>
-                        <div className={"col-1"}/>
-                        <div className={"flex col-5 align-items-center"}>
-                            <div className={"flex col-1 justify-content-center"}>
-                                <i className={"pi pi-lock"}/>
                             </div>
-
-                            <div className={"col-11"}>
-                                <h3>An toàn thông tin</h3>
-                                <p>Chúng tôi cam kết mọi thông tin thanh toán của bạn được bảo mật và mã hóa.</p>
-                            </div>
-                        </div>
-                        <div className={"flex col-5 align-items-center"}>
-                            <div className={"flex col-1 justify-content-center"}>
-                                <i className={"pi pi-shield"}/>
-                            </div>
-                            <div className={"col-11"}>
-                                <h3>Tiêu chuẩn bảo mật</h3>
-                                <p>Mobipay đảm bảo an toàn dữ liệu, đạt tiêu chuẩn bảo mật quốc tế.</p>
-                            </div>
-                        </div>
+                        </Card>
                     </div>
                 </div>
 
                 {/*footer*/}
-                <div className={"flex"}>
-                    <div className={classes.bgFooter} style={{color: "white"}}>
-                        <div className={"flex"}>
-                            <div className={"col-1"}/>
-                            <div className={"flex col-5"}>
-                                    <div className={"col-2"}>
-                                        <img src={Logo} className={"w-full"}/>
-                                    </div>
-                                    <div className={" col-10"}>
-                                        <div>
-                                            <p>
-                                                <strong>Mobipay Gateway</strong>
-                                            </p>
-                                            <p>
-                                                <strong>Dịch vụ công thanh toán của tập đoàn Mobifone</strong>
-                                            </p>
-                                            <p>
-                                                <strong>Giấy phép hoạt động cung ứng dịch vụ Trung gian thanh toán số do Nhà
-                                                    nước cấp ngày 18/1/2020 </strong>
-                                            </p>
-                                        </div>
-
-                                    </div>
-
-                            </div>
-                            <div className={"col-5"}>
-                                <h2>Hỗ trợ khách hàng</h2>
-                                <div className={"flex"}>
-                                    <Button className={"flex col-6 align-items-center"} style={{borderRadius: 20, height: 40}}>
-                                        <i className={"pi pi-phone col-1"}/>
-                                        <div className={"col-11"}>
-                                            <span>1900 54 13 12</span>
-                                            <br/>
-                                            <span>(Cước phí 1000đ/phút)</span>
-                                        </div>
-                                    </Button>
-                                    <Button className={"flex col-6 ml-3 align-items-center"} style={{borderRadius: 70, height: 40}}>
-                                        <i className={"pi pi-phone col-1"} color={"#F27"}/>
-                                        <div className={"col-11"}>
-                                            <p>hotro@mobipay.vn</p>
-                                        </div>
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className={"flex justify-content-end"}>
-                            <p>
-                                2022
-                                <a href={"https://telsoft.com.vn"}>MOBIFONE</a>
-                                - Copyright by MobiMoney, All right is reserved
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
+                <Footer/>
             </div>
         );
     }

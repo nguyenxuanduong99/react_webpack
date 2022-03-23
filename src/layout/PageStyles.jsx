@@ -12,12 +12,7 @@ const pageStyles = {
         verticalAlign: "middle",
         border: "none",
     },
-    imgLog2: {
-        height: "6em",
-        width: "8em",
-        verticalAlign: "middle",
-        border: "none",
-    },
+
     bgWarnMessage: {
         backgroundColor: "#FBF1DB",
         height: "3rem"
@@ -28,12 +23,6 @@ const pageStyles = {
     bgDownload: {
         backgroundColor: "#FBF1DB",
     },
-    bgSercuritySafe: {
-        backgroundColor: "#008fe5",
-    },
-    bgFooter: {
-        backgroundColor: "#152944",
-        width: "100%"
-    }
+
 };
 export default pageStyles;
