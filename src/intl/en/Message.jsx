@@ -36,6 +36,11 @@ const message = {
     "LinkedBank.DomesticATM":"Domestic ATM card",
 
 
+    "Bank.Choose":"You choose to pay by bank card:",
+    "Bank.Confirm":"Confirm",
+    "Bank.SendOtp": "Send OTP",
+
+
     "Footer.Safe":"Safety Information",
     "Footer.Sercurity":"Security Standards",
     "Footer.Guarantee":"We guarantee all your payment information is secure and encrypted.",

@@ -35,6 +35,11 @@ const Message ={
     "LinkedBank.DomesticATM":"Thẻ ATM nội địa",
 
 
+    "Bank.Choose":"Bạn chọn thanh toán bằng thẻ ngân hàng: ",
+    "Bank.Confirm":"Xác nhận",
+    "Bank.SendOtp": "Gửi OTP",
+
+
     "Footer.Safe":"An toàn thông tin",
     "Footer.Sercurity":"Tiêu chuẩn bảo mật",
     "Footer.Guarantee":"Chúng tôi cam kết mọi thông tin thanh toán của bạn được bảo mật và mã hóa.",

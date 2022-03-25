@@ -5,46 +5,57 @@ import {map} from "../intl/Message";
 import PhoneInput from "react-phone-number-input/input";
 import {Button} from "primereact/button";
 import OTPInput from "otp-input-react";
-class BankOtp extends Component{
+
+class BankOtp extends Component {
     constructor(props) {
         super(props);
+        let {bank} = this.props;
         this.state = {
-            wallet: "",
+            bank: bank,
             otp: "",
+            isConfirm: false,
             isSendOTP: false,
-            numberPhone: ""
+
         };
+        this.onClickConfirm = this.onClickConfirm.bind(this);
         this.sendOTP = this.sendOTP.bind(this);
 
     }
+
+    componentDidMount() {
+        setTimeout(() => {
+
+        }, 1000);
+        console.log("bank: " + this.state.bank.value);
+    }
+
+    onClickConfirm() {
+        this.setState({
+            isConfirm: true
+        })
+    }
+
+    sendOTP() {
+        this.setState({isSendOTP: true});
+    }
+
     render() {
-        return(
+        return (
             <div className={"w-full"}>
                 <div className={"flex justify-content-center"}>
-
-                    <h1>{map("Wallet.Choose") + map(this.state.wallet)}</h1>
+                    <h1>{map("Bank.Choose") + this.state.bank.value}</h1>
                 </div>
-                <div className={"flex mt-4"}>
-                    <h2>{map("Wallet.Notification")}</h2>
-                    <div className={"flex ml-4 align-items-center col-6"}>
-                        <PhoneInput
-                            className={"h-3rem"}
-                            country="VN"
-                            autoFocus
-                            value={this.state.numberPhone}
-                            onChange={(value) => {
-                                this.setState({numberPhone: value})
-                            }}
-                        />
-                        <div className={"ml-5"}>
-                            <Button label={map("Wallet.Send")} onClick={this.sendOTP}/>
-                        </div>
+                <div>
+                    <div className={"flex justify-content-center"}>
+                        <img src={this.state.bank.icon} style={{width: "12rem"}}/>
                     </div>
+                    {/*<div className={"flex justify-content-center"}>{this.state.bank.value}</div>*/}
                 </div>
-                <div className={"flex justify-content-center mt-8"}>
+                <div className={"flex justify-content-center mt-3"}>
                     {
-                        this.state.isSendOTP
-                            ? <div className={""}>
+                        this.state.isConfirm === false
+                            ? <Button label={map("Bank.Confirm")} onClick={this.onClickConfirm}/>
+                            : <div className={""}>
                                 <OTPInput
                                     value={this.state.otp}
                                     onChange={(value) => {
@@ -57,17 +68,15 @@ class BankOtp extends Component{
                                 <div className={"flex justify-content-center mt-8"}>
                                     <Button
                                         className={"pl-5 pr-5"}
-                                        label={map("Wallet.Confirm")}
+                                        label={map("Bank.SendOtp")}
                                         onClick={this.sendOTP}/>
                                 </div>
                             </div>
-                            : <div/>
                     }
-
                 </div>
-
             </div>
         );
     }
 }
+
 export default withStyles(bankOtpStyle)(BankOtp);

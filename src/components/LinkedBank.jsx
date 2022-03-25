@@ -4,14 +4,15 @@ import linkedBankStyle from "../styles/LinkedBankStyle";
 import {map} from "../intl/Message";
 import Logo from "../assets/images/qrCode.jpg";
 import DataListView from "./DataListView";
+import BankOtp from "./BankOtp";
 
 class LinkedBank extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            selectedBank: "",
-            type: "",
+            selectedBank: {value: "Vietcombank", key: "0", icon: Logo},
+            type: "direct",
 
         };
         this.directBankOption = [
@@ -56,7 +57,7 @@ class LinkedBank extends Component {
 
     onChooseBankDirect(bank) {
         this.setState({
-            selectedBank: bank.value,
+            selectedBank: bank,
             type: "direct"
         });
         // console.log("bank "+ bank.value);
@@ -64,7 +65,7 @@ class LinkedBank extends Component {
 
     onChooseBankDomestic(bank) {
         this.setState({
-            selectedBank: bank.value,
+            selectedBank: bank,
             type: "domestic"
         });
         // console.log("bank "+ bank.value);
@@ -73,27 +74,34 @@ class LinkedBank extends Component {
     render() {
         return (
             <div className={"w-full"}>
-                <div className={"flex justify-content-center"}>
-                    <h2>{map("LinkedBank.Choose")}</h2>
-                </div>
-                <div className={""}>
-                    <h2>{map("LinkedBank.DirectLinkBank")}</h2>
-                </div>
-                <div>
-                    <DataListView
-                        list={this.directBankOption}
-                        onChooseBank={this.onChooseBankDirect}
-                    />
-                </div>
-                <div className={""}>
-                    <h2>{map("LinkedBank.DomesticATM")}</h2>
-                </div>
-                <div>
-                    <DataListView
-                        list={this.domesticATMOption}
-                        onChooseBank={this.onChooseBankDomestic}
-                    />
-                </div>
+                {
+                    this.state.type === ""
+                        ? <div className={"w-full"}>
+                            <div className={"flex justify-content-center"}>
+                                <h2>{map("LinkedBank.Choose")}</h2>
+                            </div>
+                            <div className={""}>
+                                <h2>{map("LinkedBank.DirectLinkBank")}</h2>
+                            </div>
+                            <div>
+                                <DataListView
+                                    list={this.directBankOption}
+                                    onChooseBank={this.onChooseBankDirect}
+                                />
+                            </div>
+                            <div className={""}>
+                                <h2>{map("LinkedBank.DomesticATM")}</h2>
+                            </div>
+                            <div>
+                                <DataListView
+                                    list={this.domesticATMOption}
+                                    onChooseBank={this.onChooseBankDomestic}
+                                />
+                            </div>
+                        </div>
+                        : <BankOtp bank={this.state.selectedBank}/>
+                }
+
             </div>
         );
     }
