@@ -64,10 +64,9 @@ class Footer extends Component{
 
                             </div>
                             <div className={"col-5"}>
-                                <h2>Hỗ trợ khách hàng</h2>
+                                <h2>{map("Footer.Support")}</h2>
                                 <div className={"flex"}>
-                                    <Button className={"flex col-6 align-items-center"}
-                                            style={{borderRadius: 20, height: 40}}>
+                                    <Button className={"flex col-6 align-items-center h-3rem"} style={{borderRadius:70}}>
                                         <i className={"pi pi-phone col-1"}/>
                                         <div className={"col-11"}>
                                             <span>1900 54 13 12</span>
@@ -75,9 +74,9 @@ class Footer extends Component{
                                             <span>({map("Footer.Postage")})</span>
                                         </div>
                                     </Button>
-                                    <Button className={"flex col-6 ml-3 align-items-center"}
-                                            style={{borderRadius: 70, height: 40}}>
-                                        <i className={"pi pi-phone col-1"} color={"#F27"}/>
+                                    <Button className={"flex col-6 ml-3 align-items-center h-3rem"}
+                                            style={{borderRadius: 70}}>
+                                        <i className={"pi pi-inbox col-1"}/>
                                         <div className={"col-11"}>
                                             <p>hotro@mobipay.vn</p>
                                         </div>

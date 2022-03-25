@@ -14,8 +14,8 @@ class Pages extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedLanguage: "vn",
-            selectedComponent: 0,
+            selectedLanguage: Session.getLocale(),
+            selectedComponent: 1,
             timeunix: 0,
             time: {},
 
@@ -30,7 +30,7 @@ class Pages extends Component {
             {value: "WalletPayment", key: 2},
             {value: "LinkedBank", key: 3},
             {value: "OtherBank", key: 0},
-        ]
+        ];
         this.language = [
             {value: "Việt Nam", key: "vn"},
             {value: "English", key: "en"}
@@ -87,20 +87,11 @@ class Pages extends Component {
 
     onLanguageChange(e) {
         Session.setLocale(e.value);
-        console.log(e);
         this.setState({selectedLanguage: e.value});
+        console.log(e.key)
     }
 
-    renderSwitch(value){
-        switch (value){
-            case 0:
-                return <QRCode />;
-            case 1:
-                return <Payment />;
-            case 2:
-                return <div />
-        }
-    }
+
 
     render() {
         const {classes: {bgWarnMessage, container, imgLog}} = this.props;
@@ -120,7 +111,6 @@ class Pages extends Component {
                                   optionValue={"key"}
                                   options={this.language}
                                   onChange={this.onLanguageChange}
-                            // placeholder={"Việt Nam"}
                         />
                     </div>
                 </div>
@@ -138,7 +128,12 @@ class Pages extends Component {
 
                     {/*fragment left multiple component*/}
                     <div className={"col-7"}>
-                        {this.renderSwitch(this.state.selectedComponent)}
+                        {
+                            this.state.selectedComponent === 0
+                                ? <QRCode />
+                                :<Payment />
+                    }
+
                     </div>
 
                     {/*fragment right*/}

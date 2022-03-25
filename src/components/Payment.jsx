@@ -3,18 +3,22 @@ import withStyles from "react-jss";
 import pageStyles from "../layout/PageStyles";
 import {map} from "../intl/Message";
 import {ListBox} from "primereact/listbox";
+import {paymentKey} from "../assets/enum";
+import Wallet from "./Wallet";
+import LinkedBank from "./LinkedBank";
 
 class Payment extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedPayment: null,
+            selectedPayment: "Payment.NHLK",
         };
+
         this.PaymentOption = [
-            {value: "Payment.MP", key: "MP"},
-            {value: "Payment.MM", key: "MM"},
-            {value: "Payment.NHLK", key: "NHLK"},
-            {value: "Payment.NH", key: "NH"},
+            {value: "Payment.MP", key: paymentKey.MP},
+            {value: "Payment.MM", key: paymentKey.MM},
+            {value: "Payment.NHLK", key: paymentKey.NHLK},
+            {value: "Payment.NH", key: paymentKey.NH},
         ];
         this.paymentTemplate = this.paymentTemplate.bind(this);
         this.onChoosePayment = this.onChoosePayment.bind(this);
@@ -29,13 +33,25 @@ class Payment extends Component {
         );
     }
 
-    onChoosePayment(option){
+    onChoosePayment(option) {
         this.setState({selectedPayment: option.value});
-
     }
 
-    render() {
-        const {classes = {}} = this.props;
+    renderSwitch(value) {
+        switch (value) {
+            case "body":
+                return this.bodyPayment();
+            case "Payment.MP":
+            case "Payment.MM":
+                return <Wallet wallet = {value}/>
+            case "Payment.NHLK":
+                return <LinkedBank/>
+            case "Payment.NH":
+                return <div/>
+        }
+    }
+
+    bodyPayment() {
         return (
             <div className={"w-full"}>
                 <div className={"flex justify-content-center"}>
@@ -53,6 +69,14 @@ class Payment extends Component {
             </div>
         );
     }
+
+    render() {
+        const {classes = {}} = this.props;
+        return (
+            this.renderSwitch(this.state.selectedPayment)
+        );
+    }
 }
+
 
 export default withStyles(pageStyles)(Payment);

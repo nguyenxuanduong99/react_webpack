@@ -25,6 +25,15 @@ const Message ={
     "Payment.NHLK":"Tài khoản ngân hàng đã liên kết",
     "Payment.NH":"Tài khoản hoặc thẻ Ngân hàng khác",
 
+    "Wallet.Choose":"Bạn chọn thanh toán bằng: ",
+    "Wallet.Notification": "Hệ thống sẽ gửi OTP đến số điện thoại ",
+    "Wallet.Send": "Gửi",
+    "Wallet.Confirm": "Xác nhận",
+
+    "LinkedBank.Choose": "Chọn liên kết ngân hàng ",
+    "LinkedBank.DirectLinkBank":"Ngân hàng liên kết trực tiếp",
+    "LinkedBank.DomesticATM":"Thẻ ATM nội địa",
+
 
     "Footer.Safe":"An toàn thông tin",
     "Footer.Sercurity":"Tiêu chuẩn bảo mật",
@@ -32,6 +41,7 @@ const Message ={
     "Footer.Ensure":"MobiMeny đảm bảo an toàn dữ liệu, đạt tiêu chuẩn bảo mật quốc tế.",
     "Footer.Corporation":"Dịch vụ cổng thanh toán của tập đoàn Mobifone",
     "Footer.License":"Giấy phép hoạt động cung ứng dịch vụ Trung gian thanh toán số do Nhà nước cấp ngày 18/1/2020",
+    "Footer.Support":"Hỗ trợ khách hàng",
     "Footer.Postage":"Cước phí 1000đ/phút",
 };
 export default Message;
