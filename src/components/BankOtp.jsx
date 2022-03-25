@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import withStyles from "react-jss";
 import bankOtpStyle from "../styles/BankOtpStyle";
 import {map} from "../intl/Message";
-import PhoneInput from "react-phone-number-input/input";
 import {Button} from "primereact/button";
 import OTPInput from "otp-input-react";
 
@@ -14,7 +13,6 @@ class BankOtp extends Component {
             bank: bank,
             otp: "",
             isConfirm: false,
-            isSendOTP: false,
 
         };
         this.onClickConfirm = this.onClickConfirm.bind(this);
@@ -36,7 +34,7 @@ class BankOtp extends Component {
     }
 
     sendOTP() {
-        this.setState({isSendOTP: true});
+
     }
 
     render() {
@@ -49,7 +47,6 @@ class BankOtp extends Component {
                     <div className={"flex justify-content-center"}>
                         <img src={this.state.bank.icon} style={{width: "12rem"}}/>
                     </div>
-                    {/*<div className={"flex justify-content-center"}>{this.state.bank.value}</div>*/}
                 </div>
                 <div className={"flex justify-content-center mt-3"}>
                     {

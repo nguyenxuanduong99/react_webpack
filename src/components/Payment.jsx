@@ -6,12 +6,13 @@ import {ListBox} from "primereact/listbox";
 import {paymentKey} from "../assets/enum";
 import Wallet from "./Wallet";
 import LinkedBank from "./LinkedBank";
+import OtherBank from "./OtherBank";
 
 class Payment extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedPayment: "Payment.NHLK",
+            selectedPayment: "Payment.NH",
         };
 
         this.PaymentOption = [
@@ -47,7 +48,7 @@ class Payment extends Component {
             case "Payment.NHLK":
                 return <LinkedBank/>
             case "Payment.NH":
-                return <div/>
+                return <OtherBank/>
         }
     }
 

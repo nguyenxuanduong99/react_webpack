@@ -40,6 +40,9 @@ const Message ={
     "Bank.SendOtp": "Gửi OTP",
 
 
+    "OtherBank.Choose":"Chọn ngân hàng",
+
+
     "Footer.Safe":"An toàn thông tin",
     "Footer.Sercurity":"Tiêu chuẩn bảo mật",
     "Footer.Guarantee":"Chúng tôi cam kết mọi thông tin thanh toán của bạn được bảo mật và mã hóa.",

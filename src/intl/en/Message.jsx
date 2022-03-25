@@ -41,6 +41,9 @@ const message = {
     "Bank.SendOtp": "Send OTP",
 
 
+    "OtherBank.Choose":"Choose bank",
+
+
     "Footer.Safe":"Safety Information",
     "Footer.Sercurity":"Security Standards",
     "Footer.Guarantee":"We guarantee all your payment information is secure and encrypted.",
