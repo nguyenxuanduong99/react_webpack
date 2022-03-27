@@ -4,13 +4,14 @@ import otherBankStyle from "../styles/OtherBankStyle";
 import Logo from "../assets/images/qrCode.jpg";
 import {map} from "../intl/Message";
 import DataListView from "./DataListView";
+import BankOtp from "./BankOtp";
 
 class OtherBank extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-
+            selectedBank: {value: "Vietcombank", key: "0", icon: Logo},
         };
         this.bankOption = [
             {value: "Vietcombank", key: "0", icon: Logo},
@@ -31,23 +32,34 @@ class OtherBank extends Component {
         this.onChooseBank = this.onChooseBank.bind(this);
     }
     onChooseBank(bank){
-
+        setTimeout(()=>{
+            this.setState({
+                selectedBank : bank,
+            })
+        },1000);
     }
     render() {
         return (
-            <div className={"w-full"}>
-                <div className={"w-full"}>
-                    <div className={"flex justify-content-center"}>
-                        <h2>{map("OtherBank.Choose")}</h2>
+        <div className={"w-full"}>
+            {
+                this.state.selectedBank === null
+                    ? <div className={"w-full"}>
+                        <div className={"w-full"}>
+                            <div className={"flex justify-content-center"}>
+                                <h2>{map("OtherBank.Choose")}</h2>
+                            </div>
+                            <div>
+                                <DataListView
+                                    list={this.bankOption}
+                                    onChooseBank={this.onChooseBank}
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <DataListView
-                            list={this.bankOption}
-                            onChooseBank={this.onChooseBankDirect}
-                        />
-                    </div>
-                </div>
-            </div>
+                    : <BankOtp bank={this.state.selectedBank}/>
+            }
+
+        </div>
         );
     }
 }
