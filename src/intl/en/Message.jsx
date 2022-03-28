@@ -43,6 +43,12 @@ const message = {
 
     "OtherBank.Choose":"Choose bank",
 
+    "ConfirmAccBank.Confirm":"Please confirm payment by bank",
+    "ConfirmAccBank.Continue": "Continue",
+    "ConfirmAccBank.AccountNumber":"Account number ",
+    "ConfirmAccBank.AccountUser":" Account user",
+
+    "SuccessNotify.Notify":"You have successfully paid.",
 
     "Footer.Safe":"Safety Information",
     "Footer.Sercurity":"Security Standards",

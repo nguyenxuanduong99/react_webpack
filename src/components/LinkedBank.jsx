@@ -11,8 +11,8 @@ class LinkedBank extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedBank: {value: "Vietcombank", key: "0", icon: Logo},
-            type: "direct",
+            selectedBank: null,
+            type: 0,
 
         };
         this.directBankOption = [
@@ -49,10 +49,23 @@ class LinkedBank extends Component {
         ];
         this.onChooseBankDirect = this.onChooseBankDirect.bind(this);
         this.onChooseBankDomestic = this.onChooseBankDomestic.bind(this);
+        this.comeBack = this.comeBack.bind(this);
+        this.comeBackLinkedBank = this.comeBackLinkedBank.bind(this);
+
     }
 
-    componentDidMount() {
+    comeBack() {
+        let {comeBack} = this.props;
+        if ((comeBack !== undefined)) {
+            comeBack();
+        }
+    }
 
+    comeBackLinkedBank(){
+        this.setState({
+            selectedBank: null,
+            type: 0
+        });
     }
 
     onChooseBankDirect(bank) {
@@ -60,7 +73,6 @@ class LinkedBank extends Component {
             selectedBank: bank,
             type: "direct"
         });
-        // console.log("bank "+ bank.value);
     }
 
     onChooseBankDomestic(bank) {
@@ -68,17 +80,17 @@ class LinkedBank extends Component {
             selectedBank: bank,
             type: "domestic"
         });
-        // console.log("bank "+ bank.value);
     }
 
     render() {
         return (
             <div className={"w-full"}>
                 {
-                    this.state.type === ""
+                    this.state.type === 0
                         ? <div className={"w-full"}>
-                            <div className={"flex justify-content-center"}>
-                                <h2>{map("LinkedBank.Choose")}</h2>
+                            <div className={""}>
+                                <i className={"pi pi-arrow-left"} onClick={this.comeBack}/>
+                                <h2 className={"flex justify-content-center"}>{map("LinkedBank.Choose")}</h2>
                             </div>
                             <div className={""}>
                                 <h2>{map("LinkedBank.DirectLinkBank")}</h2>
@@ -99,7 +111,9 @@ class LinkedBank extends Component {
                                 />
                             </div>
                         </div>
-                        : <BankOtp bank={this.state.selectedBank}/>
+                        : <BankOtp bank={this.state.selectedBank}
+                                   comeBack={this.comeBackLinkedBank}
+                        />
                 }
 
             </div>

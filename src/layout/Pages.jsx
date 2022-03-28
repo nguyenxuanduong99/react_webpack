@@ -88,7 +88,6 @@ class Pages extends Component {
     onLanguageChange(e) {
         Session.setLocale(e.value);
         this.setState({selectedLanguage: e.value});
-        console.log(e.key)
     }
 
 

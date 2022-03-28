@@ -12,7 +12,7 @@ class Payment extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedPayment: "Payment.NH",
+            selectedPayment: "body",
         };
 
         this.PaymentOption = [
@@ -23,7 +23,7 @@ class Payment extends Component {
         ];
         this.paymentTemplate = this.paymentTemplate.bind(this);
         this.onChoosePayment = this.onChoosePayment.bind(this);
-
+        this.comeBack = this.comeBack.bind(this);
     }
 
     paymentTemplate(option) {
@@ -44,19 +44,26 @@ class Payment extends Component {
                 return this.bodyPayment();
             case "Payment.MP":
             case "Payment.MM":
-                return <Wallet wallet = {value}/>
+                return <Wallet wallet={value} comeBack = {this.comeBack}/>
             case "Payment.NHLK":
-                return <LinkedBank/>
+                return <LinkedBank comeBack = {this.comeBack}/>
             case "Payment.NH":
-                return <OtherBank/>
+                return <OtherBank comeBack = {this.comeBack}/>
         }
     }
-
+    comeBack(){
+        setTimeout(
+            ()=>{
+                this.setState({selectedPayment: "body"});
+            },1000
+        );
+    }
     bodyPayment() {
         return (
             <div className={"w-full"}>
-                <div className={"flex justify-content-center"}>
-                    <h2>{map("Payment.Choose")}</h2>
+                <div className={""}>
+                    {/*<i className={"pi pi-arrow-left"} onClick={this.comeBack}/>*/}
+                    <h2 className={"flex justify-content-center"}>{map("Payment.Choose")}</h2>
                 </div>
                 <div>
                     <ListBox className={"w-full"}

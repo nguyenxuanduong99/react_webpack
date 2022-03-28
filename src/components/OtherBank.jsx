@@ -4,14 +4,15 @@ import otherBankStyle from "../styles/OtherBankStyle";
 import Logo from "../assets/images/qrCode.jpg";
 import {map} from "../intl/Message";
 import DataListView from "./DataListView";
-import BankOtp from "./BankOtp";
+import ConfirmAccBank from "./ConfirmAccBank";
+import SuccessNotify from "./SuccessNotify";
 
 class OtherBank extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            selectedBank: {value: "Vietcombank", key: "0", icon: Logo},
+            selectedBank: null,
         };
         this.bankOption = [
             {value: "Vietcombank", key: "0", icon: Logo},
@@ -30,36 +31,57 @@ class OtherBank extends Component {
             {value: "VPBank", key: "13", icon: Logo},
         ];
         this.onChooseBank = this.onChooseBank.bind(this);
+        this.comeBack = this.comeBack.bind(this);
+        this.comeBackOtherBank = this.comeBackOtherBank.bind(this);
     }
-    onChooseBank(bank){
-        setTimeout(()=>{
+
+    comeBack() {
+        let {comeBack} = this.props;
+        if ((comeBack !== undefined)) {
+            comeBack();
+        }
+    }
+
+    comeBackOtherBank() {
+        this.setState({
+            selectedBank: null,
+        })
+    }
+
+    onChooseBank(bank) {
+        setTimeout(() => {
             this.setState({
-                selectedBank : bank,
+                selectedBank: bank,
             })
-        },1000);
+        }, 1000);
     }
+
     render() {
         return (
-        <div className={"w-full"}>
-            {
-                this.state.selectedBank === null
-                    ? <div className={"w-full"}>
-                        <div className={"w-full"}>
-                            <div className={"flex justify-content-center"}>
-                                <h2>{map("OtherBank.Choose")}</h2>
-                            </div>
-                            <div>
-                                <DataListView
-                                    list={this.bankOption}
-                                    onChooseBank={this.onChooseBank}
-                                />
+            <div className={"w-full"}>
+                {
+                    this.state.selectedBank === null
+                        ? <div className={"w-full"}>
+                            <div className={"w-full"}>
+                                <div className={""}>
+                                    <i className={"pi pi-arrow-left"} onClick={this.comeBack}/>
+                                    <h2 className={"flex justify-content-center"}>{map("OtherBank.Choose")}</h2>
+                                </div>
+                                <div>
+                                    <DataListView
+                                        list={this.bankOption}
+                                        onChooseBank={this.onChooseBank}
+                                    />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    : <BankOtp bank={this.state.selectedBank}/>
-            }
+                        : <ConfirmAccBank bank={this.state.selectedBank}
+                                          comeBack={this.comeBackOtherBank}
+                        />
+                }
 
-        </div>
+            </div>
+
         );
     }
 }

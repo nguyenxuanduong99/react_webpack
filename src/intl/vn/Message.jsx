@@ -42,6 +42,13 @@ const Message ={
 
     "OtherBank.Choose":"Chọn ngân hàng",
 
+    "ConfirmAccBank.Confirm":"Bạn hãy xác nhận thanh toán bằng ngân hàng",
+    "ConfirmAccBank.Continue":"Tiếp tục",
+    "ConfirmAccBank.AccountNumber":"Số tài khoản",
+    "ConfirmAccBank.AccountUser": "Tên chủ thẻ",
+
+
+    "SuccessNotify.Notify":"Bạn đã thanh toán thành công.",
 
     "Footer.Safe":"An toàn thông tin",
     "Footer.Sercurity":"Tiêu chuẩn bảo mật",

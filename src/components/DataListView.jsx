@@ -67,7 +67,9 @@ class DataListView extends Component {
 
     onClickBank(e,bank){
         let{onChooseBank} = this.props;
-        onChooseBank(bank);
+        if((onChooseBank !== undefined)){
+            onChooseBank(bank);
+        }
     }
 
     render() {
