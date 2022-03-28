@@ -9,6 +9,7 @@ import Footer from "../components/Footer.jsx";
 import {Card} from "primereact/card";
 import QRCode from "../components/QRCode";
 import Payment from "../components/Payment";
+import TestOtp from "../components/TestOtp";
 
 class Pages extends Component {
     constructor(props) {
@@ -91,7 +92,6 @@ class Pages extends Component {
     }
 
 
-
     render() {
         const {classes: {bgWarnMessage, container, imgLog}} = this.props;
         return (
@@ -104,13 +104,16 @@ class Pages extends Component {
                         <span className={"font-semibold text-3xl"}>| GATEWAY</span>
                     </a>
                     <div className={"col-4"}/>
-                    <div className="col-2">
-                        <Dropdown value={this.state.selectedLanguage}
-                                  optionLabel={"value"}
-                                  optionValue={"key"}
-                                  options={this.language}
-                                  onChange={this.onLanguageChange}
-                        />
+                    <div className="flex col-2 justify-content-end">
+                        <div>
+                            <Dropdown value={this.state.selectedLanguage}
+                                      optionLabel={"value"}
+                                      optionValue={"key"}
+                                      options={this.language}
+                                      onChange={this.onLanguageChange}
+                            />
+                        </div>
+
                     </div>
                 </div>
 
@@ -129,9 +132,10 @@ class Pages extends Component {
                     <div className={"col-7"}>
                         {
                             this.state.selectedComponent === 0
-                                ? <QRCode />
-                                :<Payment />
-                    }
+                                ? <QRCode/>
+                                : <Payment/>
+                            // :<TestOtp/>
+                        }
 
                     </div>
 
@@ -167,14 +171,15 @@ class Pages extends Component {
                                 <a href={"#"} style={{fontSize: "1.2em", color: "#ff4f31"}}>
                                     <i className={"pi pi-times mr-1"}/>
                                     {map("Page.CancelTransaction")}
+
                                 </a>
                             </div>
                         </div>
                         {/*thoi gian giao dich*/}
                         <Card className={"mt-3"} style={{backgroundColor: "#FBF1DB"}}>
                             <div>
-                                <p className={"text-center"}>{map("Page.TransactionTime")}</p>
-                                <div className={"text-center"}>
+                                <p className={"text-center text-xl"}>{map("Page.TransactionTime")}</p>
+                                <div className={"text-center text-5xl"}>
                                     {this.state.time.m} : {this.state.time.s}
                                 </div>
                             </div>

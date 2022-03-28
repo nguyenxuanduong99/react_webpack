@@ -101,15 +101,15 @@ class LinkedBank extends Component {
                                     onChooseBank={this.onChooseBankDirect}
                                 />
                             </div>
-                            <div className={""}>
-                                <h2>{map("LinkedBank.DomesticATM")}</h2>
-                            </div>
-                            <div>
-                                <DataListView
-                                    list={this.domesticATMOption}
-                                    onChooseBank={this.onChooseBankDomestic}
-                                />
-                            </div>
+                            {/*<div className={""}>*/}
+                            {/*    <h2>{map("LinkedBank.DomesticATM")}</h2>*/}
+                            {/*</div>*/}
+                            {/*<div>*/}
+                            {/*    <DataListView*/}
+                            {/*        list={this.domesticATMOption}*/}
+                            {/*        onChooseBank={this.onChooseBankDomestic}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
                         </div>
                         : <BankOtp bank={this.state.selectedBank}
                                    comeBack={this.comeBackLinkedBank}
