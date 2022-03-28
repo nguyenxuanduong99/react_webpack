@@ -10,7 +10,7 @@ import {Card} from "primereact/card";
 import QRCode from "../components/QRCode";
 import Payment from "../components/Payment";
 
-class Pages extends Component {
+class PaymentLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -128,7 +128,7 @@ class Pages extends Component {
 
                     {/*fragment left multiple component*/}
                     <div className={"col-7"}>
-                                 <QRCode/>
+                        <Payment/>
                     </div>
 
                     {/*fragment right*/}
@@ -186,4 +186,4 @@ class Pages extends Component {
     }
 }
 
-export default withStyles(pageStyles)(Pages);
+export default withStyles(pageStyles)(PaymentLayout);
