@@ -12,7 +12,7 @@ class LinkedBank extends Component {
         super(props);
         this.state = {
             selectedBank: null,
-            type: 0,
+            type: "",
 
         };
         this.directBankOption = [
@@ -64,7 +64,7 @@ class LinkedBank extends Component {
     comeBackLinkedBank(){
         this.setState({
             selectedBank: null,
-            type: 0
+            type: ""
         });
     }
 
@@ -86,7 +86,7 @@ class LinkedBank extends Component {
         return (
             <div className={"w-full"}>
                 {
-                    this.state.type === 0
+                    this.state.type === ""
                         ? <div className={"w-full"}>
                             <div className={""}>
                                 <i className={"pi pi-arrow-left"} onClick={this.comeBack}/>
